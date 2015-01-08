@@ -8,7 +8,7 @@ I defintely learned some new things about APIs I had never had any experience wi
 -------------------
 Python: Fully implemented and complete! Python was a breeze and only took a few hours to learn about APIs and install the libraries and look up how to HTTP Post etc. Ah I do love Python. <3
 
-JavaScript: I started working on the challenge in JavaScript for some extra practice. So far I've created the code for the registration and getting the token. Although I haven't completed all theh stages yet in JavaScript I figured it would be better to show my progress.
+JavaScript: I started working on the challenge in JavaScript for some extra practice. So far I've created the code for the registration and getting the token. Although I haven't completed all the stages yet in JavaScript but I figured it would be better to show my progress.
 
 Java: I also started working on the challenge in Java. So far I set up the registration and getting the token.
 
