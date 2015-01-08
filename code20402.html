@@ -1,0 +1,153 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Code2040 Challenge</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+  <script type="text/javascript">
+  	$(document).ready(function() 
+    {
+      var Challenge = function() 
+      {
+          /*
+            I wanted to create this dictionary to store all of
+            the urls I would be using for the post and returns.
+            In the stages element 0 of the array is the first url that 
+            the token will be sent to. And element 1 of the array is the
+            url that the token and answer to the stage problem.
+          */
+          var urls = 
+          {
+            "register": ["http://challenge.code2040.org/api/register"],
+            "stage1":["http://challenge.code2040.org/api/getstring", "http://challenge.code2040.org/api/validatestring"],
+            "stage2":["http://challenge.code2040.org/api/haystack", "http://challenge.code2040.org/api/validateneedle"],
+            "stage3":["http://challenge.code2040.org/api/prefix", "http://challenge.code2040.org/api/validateprefix"],
+            "stage4":["http://challenge.code2040.org/api/time", "http://challenge.code2040.org/api/validatetime"]
+          };
+
+          var regDic = 
+          {"email":"kelsey.jones003@gmail.com", 
+          "github":"https://github.com/jones3kd/CODE2040-Challanges"
+          };
+
+          var token = {};
+          //alert("inside challenge instation");
+
+          //start executing
+          this.register(this.stage1);
+
+          /*
+           *Register and post email and github as a JSON file to the register url.
+           */
+          register = function(callback)
+          {
+            console.log("in register");
+            regDic = JSON.stringify(regDic);
+
+            $.post(urls["register"][0], regDic, 
+              function(data, status)
+              {
+                data = JSON.stringify(data);
+                token = JSON.parse(data);
+
+                token = {"token": token.result};
+
+                console.log("status: " + status + "\nresult: " + JSON.stringify(token) );
+                
+                setTokenGlobally(token);
+              });
+
+            function setTokenGlobally(tkn) 
+            {
+              token = tkn;
+
+              //I had to use a callback here because Jquery post method is asynchronous. Meaning sending the request (or rather receiving the response) is taken out of the normal execution flow
+
+              //I was having a problem with setting the global variable token and using it for the next stage so this was a solution I figured out for the problem
+
+              //This callback will start the stage1 method
+              callback();
+            };
+
+          };
+
+            /*
+           *Posts and sends the token depending on which stage string is passed in the 
+            parameters.
+           */
+          postToken = function(stage)
+          {
+            console.log("inside post token starting token:" + JSON.stringify(token));
+            var returnDic;
+            console.log(urls[stage][0]);
+
+            $.post(urls[stage][0], JSON.stringify(token), 
+              function(data, status)
+              {
+                data = JSON.stringify(data);
+                data = JSON.parse(data);
+                returnDic = data;
+                console.log(JSON.stringify(returnDic));
+                console.log("PostToken status: " + status + "\nresult: " + data );
+              });
+
+            console.log(JSON.stringify(returnDic));
+            return returnDic;
+          };
+
+          stage1 = function()
+          {
+            //console.log("inside stage1 starting token: " + JSON.stringify(token));
+
+            this.postToken("stage1");
+          };
+
+      };
+
+  		$("button").click(function() 
+      {
+        console.log("button has been pressed");
+        var chall = new Challenge();
+        console.log("after instation chall");
+
+        /*
+  			var dic = {"email":"kelsey.jones003@gmail.com", "github":"https://github.com/jones3kd/CODE2040-Challanges"};
+
+  			dic = JSON.stringify(dic);
+
+  			$.post("http://challenge.code2040.org/api/register", dic, function(data, status) 
+        {
+  				data = JSON.stringify(data);
+  				var respDic = JSON.parse(data);
+
+  				//token to use to post and return
+  				tokenDic = {"token": respDic.result};
+
+  				//Stage I
+  				
+  				
+  				alert(JSON.stringify(tokenDic) + "\nData: " + data + "\nStatus " + status);
+          
+  			});
+        */
+
+
+  		});
+
+  	});
+
+  </script>
+</head>
+
+<body>
+	<button>Register and get token</button>
+  <script src="js/code2040.js"></script>
+</body>
+</html>
