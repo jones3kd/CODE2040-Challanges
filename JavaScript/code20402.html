@@ -12,7 +12,7 @@
 
 
   <script type="text/javascript">
-  	$(document).ready(function() 
+    $(document).ready(function() 
     {
       var Challenge = function() 
       {
@@ -38,7 +38,6 @@
           };
 
           var token = {};
-          //alert("inside challenge instation");
 
           //start executing
           this.register(this.stage1);
@@ -68,9 +67,11 @@
             {
               token = tkn;
 
-              //I had to use a callback here because Jquery post method is asynchronous. Meaning sending the request (or rather receiving the response) is taken out of the normal execution flow
+              //I had to use a callback here because Jquery post method is asynchronous. Meaning sending the request 
+              //(or rather receiving the response) is taken out of the normal execution flow
 
-              //I was having a problem with setting the global variable token and using it for the next stage so this was a solution I figured out for the problem
+              //I was having a problem with setting the global variable token and using it for the 
+              //next stage so this was a solution I figured out for the problem
 
               //This callback will start the stage1 method
               callback();
@@ -111,37 +112,14 @@
 
       };
 
-  		$("button").click(function() 
+      $("button").click(function() 
       {
         console.log("button has been pressed");
         var chall = new Challenge();
         console.log("after instation chall");
-
-        /*
-  			var dic = {"email":"kelsey.jones003@gmail.com", "github":"https://github.com/jones3kd/CODE2040-Challanges"};
-
-  			dic = JSON.stringify(dic);
-
-  			$.post("http://challenge.code2040.org/api/register", dic, function(data, status) 
-        {
-  				data = JSON.stringify(data);
-  				var respDic = JSON.parse(data);
-
-  				//token to use to post and return
-  				tokenDic = {"token": respDic.result};
-
-  				//Stage I
-  				
-  				
-  				alert(JSON.stringify(tokenDic) + "\nData: " + data + "\nStatus " + status);
-          
-  			});
-        */
-
-
-  		});
-
-  	});
+       });
+       
+       });
 
   </script>
 </head>
