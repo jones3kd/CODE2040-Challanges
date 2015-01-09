@@ -7,7 +7,12 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject; 
 
-
+/*
+ * Code2040: This class will contain code for the 4 stages of the CODE2040 Challenges.
+ *
+ *author: Kelsey Jones
+ *
+ */
 public class Code2040 
 {
 
